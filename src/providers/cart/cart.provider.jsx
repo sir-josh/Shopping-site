@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 
-import { addItemToCart, removeItemFromCart } from "./cart.utils";
+import { addItemToCart, removeItemFromCart, clearOutItemFromCart } from "./cart.utils";
 
 export const CartContext = createContext({
     hidden: true,
@@ -20,6 +20,7 @@ const CartProvider = ({ children }) => {
     const addItem = item => setCartItems(addItemToCart(cartItems, item));
     const removeItem = item => setCartItems(removeItemFromCart(cartItems, item)); 
     const toggleHidden = () => setHidden(!hidden);
+    const clearItemsFromCart = item => setCartItems(clearOutItemFromCart(cartItems, item));
 
     return (
     <CartContext.Provider value={{
@@ -29,6 +30,7 @@ const CartProvider = ({ children }) => {
         cartItemsCount,
         addItem,
         removeItem,
+        clearItemsFromCart
     }}>
         {children}
     </CartContext.Provider>
